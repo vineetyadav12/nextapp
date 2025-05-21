@@ -1,11 +1,14 @@
 import { prisma } from "@/lib/prisma";
 
-export default async function Post({
-  params,
-}: {
-  params: { id: string };
-}): Promise<any> {
-  const post = await prisma.post.findUnique({ where: { id: params.id } });
+type PageProps = {
+  params: {
+    id: string;
+  };
+};
+
+export default async function Page({ params }: PageProps) {
+  const { id } = params;
+  const post = await prisma.post.findUnique({ where: { id: id } });
 
   return (
     <main>
